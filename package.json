@@ -1,6 +1,6 @@
 {
     "name": "hiphople-news",
-    "version": "1.0.0",
+    "version": "1.0.2",
     "main": "./dist",
     "types": "./dist/types",
     "license": "MIT",
@@ -81,6 +81,5 @@
     "bugs": {
         "url": "https://github.com/killi8n/hiphople-news/issues"
     },
-    "homepage": "https://github.com/killi8n/hiphople-news#readme",
-    "version": "1.0.2"
+    "homepage": "https://github.com/killi8n/hiphople-news#readme"
 }
