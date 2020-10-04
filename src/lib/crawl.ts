@@ -7,7 +7,7 @@ const crawl = (url: string): Promise<any> => {
                 reject(error)
                 return
             }
-            resolve(body)
+            resolve(body, 'hello')
         })
     })
 }

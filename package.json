@@ -9,6 +9,17 @@
         "prepare": "yarn build",
         "lint": "eslint \"**/*.{js,ts,tsx}\""
     },
+    "husky": {
+        "hooks": {
+            "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+            "pre-commit": "yarn lint"
+        }
+    },
+    "commitlint": {
+        "extends": [
+            "@commitlint/config-conventional"
+        ]
+    },
     "dependencies": {
         "cheerio": "^1.0.0-rc.3",
         "request": "^2.88.2",
@@ -36,16 +47,5 @@
     },
     "engines": {
         "node": "12"
-    },
-    "husky": {
-        "hooks": {
-            "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-            "pre-commit": "yarn lint"
-        }
-    },
-    "commitlint": {
-        "extends": [
-            "@commitlint/config-conventional"
-        ]
     }
 }
