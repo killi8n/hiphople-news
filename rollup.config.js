@@ -8,7 +8,7 @@ export default [
         input: './src/index.ts',
         output: {
             dir: 'dist',
-            format: 'es',
+            format: 'cjs',
             preserveModules: true,
             plugins: getBabelOutputPlugin({
                 presets: ['@babel/preset-env'],
