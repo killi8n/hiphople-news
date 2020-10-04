@@ -1,6 +1,6 @@
 {
     "name": "hiphople-news",
-    "version": "1.0.1",
+    "version": "",
     "main": "./dist",
     "types": "./dist/types",
     "license": "MIT",
