@@ -1,8 +1,8 @@
 {
     "name": "hiphople-news",
     "version": "1.1.7",
-    "module": "./dist/index.js",
-    "types": "./dist/types",
+    "main": "dist/index.js",
+    "types": "dist/types",
     "license": "MIT",
     "scripts": {
         "build": "rm -rf ./dist && npx rollup -c && npx tsc --declaration --outDir ./dist/types --emitDeclarationOnly",
@@ -44,6 +44,7 @@
     },
     "devDependencies": {
         "@babel/core": "^7.11.6",
+        "@babel/plugin-transform-runtime": "^7.11.5",
         "@babel/preset-env": "^7.11.5",
         "@babel/preset-typescript": "^7.10.4",
         "@commitlint/cli": "^11.0.0",

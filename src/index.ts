@@ -3,7 +3,7 @@ import {
     HIPHOPLE_NEWS_KOREA_URL,
     HIPHOPLE_NEWS_WORLD_URL,
 } from './lib/constants'
-import crawl from './lib/crawl'
+import { crawl } from './lib/crawl'
 
 export const getHiphopleNews = async (type: 'world' | 'korea') => {
     try {
