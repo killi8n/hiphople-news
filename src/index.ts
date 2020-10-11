@@ -5,24 +5,46 @@ import {
 } from './lib/constants'
 import { crawl } from './lib/crawl'
 
-export const getHiphopleNews = async (type: 'world' | 'korea') => {
+type WorldOrKorea = 'world' | 'korea'
+
+const getURL = (type: WorldOrKorea) => {
+    let url: string = ''
+    switch (type) {
+        case 'world':
+            url = HIPHOPLE_NEWS_WORLD_URL
+            break
+        case 'korea':
+            url = HIPHOPLE_NEWS_KOREA_URL
+            break
+        default:
+            break
+    }
+
+    return url
+}
+
+export const getLatestHiphopleNews = async (type: WorldOrKorea) => {
     try {
-        let url: string = ''
-        switch (type) {
-            case 'world':
-                url = HIPHOPLE_NEWS_WORLD_URL
-                break
-            case 'korea':
-                url = HIPHOPLE_NEWS_KOREA_URL
-                break
-            default:
-                break
+        const result = await getHiphopleNews(type)
+        if (!result) {
+            return null
         }
+        if (result.length > 0) {
+            return result[0]
+        }
+    } catch (e) {
+        return null
+    }
+}
+
+export const getHiphopleNews = async (type: WorldOrKorea) => {
+    try {
+        const url: string = getURL(type)
         const body = await crawl(url)
         const $ = cheerio.load(body, { xmlMode: true })
         const newsList = $('.clear.ab-webzine').find('.wz-item')
         const result = newsList
-            .map((index, element) => {
+            .map((_, element) => {
                 const inner = $(element).find(
                     '.wz-item-inner.clear.thumbnail-left'
                 )
