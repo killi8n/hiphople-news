@@ -5,6 +5,15 @@ import {
 } from './lib/constants'
 import { crawl } from './lib/crawl'
 
+export interface HiphopleArticle {
+    id?: string
+    href?: string
+    backgroundImage?: string
+    title?: string
+    date?: string
+    view?: string
+}
+
 type WorldOrKorea = 'world' | 'korea'
 
 const getURL = (type: WorldOrKorea) => {
@@ -30,8 +39,9 @@ export const getLatestHiphopleNews = async (type: WorldOrKorea) => {
             return null
         }
         if (result.length > 0) {
-            return result[0]
+            return result[0] as HiphopleArticle
         }
+        return null
     } catch (e) {
         return null
     }
@@ -48,6 +58,10 @@ export const getHiphopleNews = async (type: WorldOrKorea) => {
                 const inner = $(element).find(
                     '.wz-item-inner.clear.thumbnail-left'
                 )
+                const href = $(element)
+                    .find('.ab-link')
+                    .attr('href')
+                    ?.toString()
                 const thumbnailWrapper = inner
                     .find('.wz-item-thumbnail')
                     .find('.thumbwrap')
@@ -60,10 +74,8 @@ export const getHiphopleNews = async (type: WorldOrKorea) => {
                 const date = metaWrapper.find('span.date').text()
                 const view = metaWrapper.find('span.view').children()
                 return {
-                    href: `${url}${$(element)
-                        .find('.ab-link')
-                        .attr('href')
-                        ?.toString()}`,
+                    id: href?.split('/')[href?.split('/').length - 1],
+                    href: `${url}${href}`,
                     backgroundImage: thumbnailWrapper
                         .children()
                         .css('background-image'),
@@ -72,7 +84,7 @@ export const getHiphopleNews = async (type: WorldOrKorea) => {
                     view: $(view[1]).text(),
                 }
             })
-            .toArray()
+            .toArray() as HiphopleArticle[]
 
         return result
     } catch (e) {
